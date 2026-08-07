@@ -14,16 +14,17 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <xacro:arg name="hardware" default="gazebo"/>
+  <xacro:property name="hardware_type" value="$(arg hardware)"/>
 
   <ros2_control name="SwerveSystem" type="system">
 
-    <xacro:if value="${$(arg hardware) == 'mock'}">
+    <xacro:if value="${hardware_type == 'mock'}">
       <hardware>
         <plugin>mock_components/GenericSystem</plugin>
       </hardware>
     </xacro:if>
 
-    <xacro:if value="${$(arg hardware) == 'gazebo'}">
+    <xacro:if value="${hardware_type == 'gazebo'}">
       <hardware>
         <plugin>gz_ros2_control/GazeboSimSystem</plugin>
       </hardware>
